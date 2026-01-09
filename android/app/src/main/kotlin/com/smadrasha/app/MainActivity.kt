@@ -1,4 +1,4 @@
-package com.smadrasha.app.smadrasha
+package com.smadrasha.app
 
 import io.flutter.embedding.android.FlutterActivity
 

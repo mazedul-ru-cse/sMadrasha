@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "342633498862",
+    "project_id": "smadrasha-e55c8",
+    "storage_bucket": "smadrasha-e55c8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:342633498862:android:1e59421e5914d81c0a4bff",
+        "android_client_info": {
+          "package_name": "com.smadrasha.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "342633498862-41sdngm8kgru6f4erukauskmigckanem.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZMn5U1mViofMQAUscTU7HTxxSczrtg48"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "342633498862-41sdngm8kgru6f4erukauskmigckanem.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
