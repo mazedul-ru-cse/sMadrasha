@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../../data/assets_names.dart';
+import '../../../../utilities/widget/button/main_button.dart';
 import '../controllers/login_page_controller.dart';
 
 class LoginPageView extends GetView<LoginPageController> {
@@ -9,10 +11,20 @@ class LoginPageView extends GetView<LoginPageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      resizeToAvoidBottomInset: false,
+      body: Container(
+        height: Get.height,
+        width: Get.width,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(AssetsNames.instance.loginBg),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Center(
           child: SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: 20),
             child: Form(
               key: controller.formKey,
               child: Obx(
@@ -50,13 +62,11 @@ class LoginPageView extends GetView<LoginPageController> {
                       },
                     ),
                     const SizedBox(height: 20),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: controller.signIn,
-                        child: const Text('Login'),
-                      ),
-                    ),
+                    Obx(()=> MainButton(
+                      title: "Login",
+                      onTap: controller.signIn,
+                      loading: controller.isLoading.value,
+                    ),)
                   ],
                 ),
               ),

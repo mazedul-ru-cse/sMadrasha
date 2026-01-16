@@ -1,7 +1,14 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
+import 'package:smadrasha/app/data/app_colors.dart';
+import 'package:smadrasha/app/data/assets_names.dart';
+import 'package:smadrasha/app/utilities/extenssion/app_extension.dart';
 
+import '../../../utilities/style/text_style.dart';
+import '../../../utilities/widget/cache image/cached_circular_image_view.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -9,12 +16,46 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('HomeView'),
-        centerTitle: true,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(90.h),
+        child: AppBar(
+          backgroundColor: AppColors.primaryColor,
+          flexibleSpace: SafeArea(
+              child: Padding(
+                padding:  EdgeInsets.symmetric(horizontal: 20.0.w),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CachedCircularImageView(
+                      imageUrl: "https://randomuser.me/api/portraits/men/1.jpg",
+                    ),
+                    4.verticalSpace,
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: "Mazedul Islam ",
+                        style: CustomTextStyle.title15WhiteBold,
+                      ),
+                      TextSpan(
+                        text: "(Super Admin)",
+                        style: CustomTextStyle.title15WhiteBold.copyWith(
+                          fontWeight: FontWeight.normal,
+                          fontSize:
+                        ),
+                      ),
+                    ],
+                  ),
+                              ),
+                  ],
+                ),
+              ),
+          ),
+        ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(20.0.w),
         child: GridView.count(
           crossAxisCount: 2,
           mainAxisSpacing: 12,

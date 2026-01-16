@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:smadrasha/app/utilities/widget/message/snack_bars.dart';
 
 import '../../../../routes/app_pages.dart';
 
@@ -11,7 +12,6 @@ class LoginPageController extends GetxController {
 
 
   final isLoading = false.obs;
-  final errorMessage = ''.obs;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
@@ -27,13 +27,12 @@ class LoginPageController extends GetxController {
   Future<void> signIn() async {
 
     if (emailController.text.trim().isEmpty || passwordController.text.isEmpty) {
-      errorMessage.value = 'Email and password are required';
+      showBasicWarningSnackBar(message: 'Email and password are required');
       return;
     }
 
 
     isLoading.value = true;
-    errorMessage.value = '';
 
     try {
       final auth = Get.find<FirebaseAuth>();
@@ -42,25 +41,31 @@ class LoginPageController extends GetxController {
         password: passwordController.text
       );
 
-      log("userCredential ::${userCredential.user}");
+      var user = FirebaseAuth.instance.currentUser;
+
+      log("user ::${user}");
+
       // Navigate to home or next screen
-      Get.offAllNamed(Routes.HOME); // adjust route as needed
+     Get.offAllNamed(Routes.HOME); // adjust route as needed
     } on FirebaseAuthException catch (e) {
+      var errorMessage = '';
       switch (e.code) {
         case 'user-not-found':
-          errorMessage.value = 'No user found with this email';
+          errorMessage = 'No user found with this email';
           break;
         case 'wrong-password':
-          errorMessage.value = 'Incorrect password';
+          errorMessage = 'Incorrect password';
           break;
         case 'invalid-email':
-          errorMessage.value = 'Invalid email address';
+          errorMessage = 'Invalid email address';
           break;
         default:
-          errorMessage.value = e.message ?? 'Login failed';
+          errorMessage = e.message ?? 'Login failed';
       }
+      showBasicFailedSnackBar(message: errorMessage);
+
     } catch (e,tr) {
-      errorMessage.value = 'An unexpected error occurred';
+      showBasicFailedSnackBar(message: 'An unexpected error occurred');
       log(e.toString());
       log(tr.toString());
     } finally {
